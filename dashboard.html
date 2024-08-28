@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard with Tabs</title>
+    <style>
+        /* Include the CSS styles for both the dashboard and the tabs */
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            background: #2E3A59; /* Changed to match your dark theme */
+            padding: 20px;
+            margin: 0;
+        }
+
+        .dashboard-container {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        .dashboard-title {
+            font-size: 32px;
+            font-weight: 600;
+            color: #BB86FC; /* Adjusted for better visibility on dark background */
+            margin-bottom: 20px;
+        }
+
+        .dashboard-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            flex-wrap: wrap;
+        }
+
+        .dashboard-buttons button {
+            width: 200px;
+            height: 150px;
+            background-color: #FFFFFF;
+            border-radius: 12px;
+            box-shadow: 0px 4px 16px rgba(0, 0, 0, 0.1);
+            font-size: 18px;
+            font-weight: 500;
+            color: #2E3A59;
+            cursor: pointer;
+            transition: transform 0.3s ease;
+        }
+
+        .dashboard-buttons button:hover {
+            transform: translateY(-5px);
+        }
+
+        .dashboard-buttons button:active {
+            transform: translateY(0);
+        }
+
+        .container {
+            max-width: 950px;
+            width: 100%;
+            padding: 50px 40px;
+            margin: 0px 20px;
+            border-radius: 12px;
+            background: #22272C;
+            box-shadow: 0px 4px 16px rgba(254, 205, 211, 0.1), 
+                        0px 8px 24px rgba(254, 205, 211, 0.1), 
+                        0px 16px 56px rgba(254, 205, 211, 0.1);
+            display: none; /* Initially hide the tabs section */
+        }
+
+        .content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .content input {
+            display: none;
+        }
+
+        .list {
+            display: flex;
+            flex-direction: column;
+            position: relative;
+            width: 20%;
+            margin-right: 50px;
+        }
+
+        .list label {
+            cursor: pointer;
+            height: 60px;
+            line-height: 60px;
+            font-size: 22px;
+            font-weight: 500;
+            color: rgba(255, 255, 255, 0.5);
+            padding-left: 25px;
+            transition: all 0.5s ease;
+            z-index: 10;
+        }
+
+        #register-patient:checked ~ .list label.register-patient,
+        #patients-admit-report:checked ~ .list label.patients-admit-report,
+        #appointments:checked ~ .list label.appointments,
+        #pharmacy:checked ~ .list label.pharmacy {
+            color: #22272C;
+        }
+
+        .slider {
+            position: absolute;
+            left: 0;
+            top: 0;
+            height: 60px;
+            width: 100%;
+            border-radius: 12px;
+            transition: all 0.5s ease;
+            background: #BB86FC;
+        }
+
+        #register-patient:checked ~ .list .slider {
+            top: 0;
+        }
+
+        #patients-admit-report:checked ~ .list .slider {
+            top: 60px;
+        }
+
+        #appointments:checked ~ .list .slider {
+            top: 120px;
+        }
+
+        #pharmacy:checked ~ .list .slider {
+            top: 180px;
+        }
+
+        .text-content {
+            width: 80%;
+            height: 100%;
+            color: rgba(255, 255, 255, 0.7);
+        }
+
+        .text {
+            display: none;
+        }
+
+        .text .title {
+            font-size: 25px;
+            margin-bottom: 10px;
+            font-weight: 500;
+        }
+
+        .container .text p {
+            text-align: justify;
+        }
+
+        #register-patient:checked ~ .text-content .register-patient,
+        #patients-admit-report:checked ~ .text-content .patients-admit-report,
+        #appointments:checked ~ .text-content .appointments,
+        #pharmacy:checked ~ .text-content .pharmacy {
+            display: block;
+        }
+
+        .list label:hover {
+            color: #BB86FC;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Dashboard Section -->
+    <div class="dashboard-container" id="dashboard-container">
+        <div class="dashboard-title">Dashboard</div>
+        <div class="dashboard-buttons">
+            <button id="dashboard-register-patient">Register Patient</button>
+            <button id="dashboard-appointments">Appointments</button>
+            <button id="dashboard-patients-admit-report">Patients Admit Report</button>
+            <button id="dashboard-pharmacy">Pharmacy</button>
+        </div>
+    </div>
+
+    <!-- Tabs Section -->
+    <div class="container" id="tabs-container">
+        <div class="content">
+            <input type="radio" name="slider" checked id="register-patient">
+            <input type="radio" name="slider" id="patients-admit-report">
+            <input type="radio" name="slider" id="appointments">
+            <input type="radio" name="slider" id="pharmacy">
+
+            <div class="list">
+                <label for="register-patient" class="register-patient">
+                    <span>Register</span>
+                </label>
+                <label for="patients-admit-report" class="patients-admit-report">
+                    <span>Patients</span>
+                </label>
+                <label for="appointments" class="appointments">
+                    <span>Appointments</span>
+                </label>
+                <label for="pharmacy" class="pharmacy">
+                    <span>Pharmacy</span>
+                </label>
+                <div class="slider"></div>
+            </div>
+
+            <div class="text-content">
+                <div class="register-patient text">
+                    <div class="title">Register Patient Content</div>
+                    <p>Details about registering a patient.</p>
+                </div>
+                <div class="patients-admit-report text">
+                    <div class="title">Patients Admit Report Content</div>
+                    <p>Details about the patients admit report.</p>
+                </div>
+                <div class="appointments text">
+                    <div class="title">Appointments Content</div>
+                    <p>Details about appointments.</p>
+                </div>
+                <div class="pharmacy text">
+                    <div class="title">Pharmacy Content</div>
+                    <p>Details about the pharmacy.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- JavaScript -->
+    <script>
+        const tabsContainer = document.getElementById('tabs-container');
+        const dashboardContainer = document.getElementById('dashboard-container');
+
+        document.getElementById('dashboard-register-patient').addEventListener('click', function() {
+            document.getElementById('register-patient').checked = true;
+            tabsContainer.style.display = 'block';
+            dashboardContainer.style.display = 'none';
+        });
+
+        document.getElementById('dashboard-patients-admit-report').addEventListener('click', function() {
+            document.getElementById('patients-admit-report').checked = true;
+            tabsContainer.style.display = 'block';
+            dashboardContainer.style.display = 'none';
+        });
+
+        document.getElementById('dashboard-appointments').addEventListener('click', function() {
+            document.getElementById('appointments').checked = true;
+            tabsContainer.style.display = 'block';
+            dashboardContainer.style.display = 'none';
+        });
+
+        document.getElementById('dashboard-pharmacy').addEventListener('click', function() {
+            document.getElementById('pharmacy').checked = true;
+            tabsContainer.style.display = 'block';
+            dashboardContainer.style.display = 'none';
+        });
+    </script>
+
+</body>
+</html>
